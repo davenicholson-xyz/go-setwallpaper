@@ -16,7 +16,6 @@ func setWallpaper(path string) error {
 
 	output, err := exec.Command("sh", "-c", cmdString).CombinedOutput()
 	if err != nil {
-		fmt.Println(output)
 		return fmt.Errorf("%w: %s", ErrSetCommandFailed, output)
 	}
 	return nil

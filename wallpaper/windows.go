@@ -17,7 +17,6 @@ const (
 )
 
 func setWallpaper(path string) error {
-	// Set WallpaperStyle in registry
 	key, err := registry.OpenKey(
 		registry.CURRENT_USER,
 		`Control Panel\Desktop`,
@@ -33,7 +32,6 @@ func setWallpaper(path string) error {
 		return err
 	}
 
-	// Convert Go string to Windows UTF-16 pointer
 	pathPtr, err := syscall.UTF16PtrFromString(path)
 	if err != nil {
 		return err
@@ -42,7 +40,6 @@ func setWallpaper(path string) error {
 	user32 := windows.NewLazySystemDLL("user32.dll")
 	systemParametersInfo := user32.NewProc("SystemParametersInfoW")
 
-	// Call SystemParametersInfoW
 	ret, _, err := systemParametersInfo.Call(
 		uintptr(SPI_SETDESKWALLPAPER),
 		uintptr(0),
